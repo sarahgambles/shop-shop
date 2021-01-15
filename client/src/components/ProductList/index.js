@@ -10,7 +10,7 @@ import spinner from "../../assets/spinner.gif";
 
 import { idbPromise } from "../../utils/helpers";
 
-function ProductList({ currentCategory }) {
+function ProductList() {
   
   const [state, dispatch] = useStoreContext();
 
@@ -41,19 +41,19 @@ function ProductList({ currentCategory }) {
         });
       });
     }
-  }, [data, dispatch]);
+  }, [data, loading, dispatch]);
 
   function filterProducts() {
     if (!currentCategory) {
       return state.products;
     }
 
-    return state.products.filter(product => product.category._id === currentCateogry);
+    return state.products.filter(product => product.category._id === currentCategory);
   }
   return (
     <div className="my-2">
       <h2>Our Products:</h2>
-      {products.length ? (
+      {state.products.length ? (
         <div className="flex-row">
             {filterProducts().map(product => (
                 <ProductItem

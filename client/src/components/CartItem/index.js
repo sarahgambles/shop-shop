@@ -7,6 +7,16 @@ import { idbPromise } from "../../utils/helpers";
 
 const CartItem = ({ item }) => {
 
+    const [, dispatch] = useStoreContext();
+
+    const removeFromCart = item => {
+        dispatch({
+            type: REMOVE_FROM_CART,
+            _id: item._id
+        });
+        idbPromise('cart', 'delete', { ...item });
+    };
+
     const onChange = (e) => {
         const value = e.target.value;
 
@@ -24,16 +34,6 @@ const CartItem = ({ item }) => {
 
             idbPromise('cart', 'put', { ...item, purchaseQuantity: parseInt(value) });
         }
-    };
-
-    const [, dispatch] = useStoreContext();
-
-    const removeFromCart = item => {
-        dispatch({
-            type: REMOVE_FROM_CART,
-            _id: item._id
-        });
-        idbPromise('cart', 'delete', { ...item });
     };
 
     return (

@@ -8,6 +8,16 @@ import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
 import { idbPromise } from "../../utils/helpers";
 
 function ProductItem(item) {
+  const [state, dispatch] = useStoreContext();
+
+  const {
+    image,
+    name,
+    _id,
+    price, 
+    quantity
+  } = item;
+
   const { cart } = state;
 
   const addToCart = () => {
@@ -16,7 +26,7 @@ function ProductItem(item) {
 
     // if there was a match, call UPDATE with a new purchase quantity
     if (itemInCart) {
-      dispatc({
+      dispatch({
         type: UPDATE_CART_QUANTITY,
         _id: _id,
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1

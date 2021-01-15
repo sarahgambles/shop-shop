@@ -1,24 +1,21 @@
 // import our actions
 import {
     UPDATE_PRODUCTS,
-    UPDATE_CATEGORIES,
-    UPDATE_CURRENT_CATEOGRY,
     ADD_TO_CART,
-    ADD_MULTIPLE_TO_CART,
-    REMOVE_FROM_CART,
     UPDATE_CART_QUANTITY,
+    REMOVE_FROM_CART,
+    ADD_MULTIPLE_TO_CART,
+    UPDATE_CATEGORIES,
+    UPDATE_CURRENT_CATEGORY,
     CLEAR_CART,
     TOGGLE_CART
 } from '../utils/actions';
 
 import { reducer } from '../utils/reducers';
-import { UPDATE_CURRENT_CATEGORY } from '../../../server/utils/actions';
 
 // create a sample of what our global state will look like
 const initialState = {
     products: [],
-    categories: [{ name: 'Food' }],
-    currentCategory: '1',
     cart: [
         {
             _id: '1',
@@ -31,7 +28,9 @@ const initialState = {
             purchaseQuantity: 2
         }
     ],
-    cartOpen: false
+    cartOpen: false,
+    categories: [{ name: 'Food' }],
+    currentCategory: '1',
 };
 
 test('UPDATE_PRODUCTS', () => {
@@ -65,7 +64,7 @@ test('UPDATE_CURRENT_CATEGORY', () => {
 });
 
 test('ADD_TO_CART', () => {
-    let newSTate = reducer(initialState, {
+    let newState = reducer(initialState, {
         type: ADD_TO_CART,
         product: { purchaseQuantity: 1 }
     });
@@ -84,7 +83,7 @@ test('ADD_MULTIPLE_TO_CART', () => {
     expect(initialState.cart.length).toBe(2);
 });
 
-test('ADD_REMOVE_CART', () => {
+test('REMOVE_FROM_CART', () => {
     let newState1 = reducer(initialState, {
         type: REMOVE_FROM_CART,
         _id: '1'

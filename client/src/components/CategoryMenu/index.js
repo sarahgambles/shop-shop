@@ -8,6 +8,7 @@ import { useStoreContext } from "../../utils/GlobalState";
 
 import { idbPromise } from '../../utils/helpers';
 
+
 function CategoryMenu({ setCategory }) {
   const [state, dispatch] = useStoreContext();
 
@@ -35,7 +36,7 @@ function CategoryMenu({ setCategory }) {
         });
       });
     }
-  }, [categoryData, dispatch]);
+  }, [categoryData, loading, dispatch]);
 
   const handleClick = id => {
     dispatch({
